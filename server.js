@@ -41,7 +41,7 @@ app.get("/api/room-exists/:roomId", (req, res) => {
 
 app.get("/api/get-turn-credentials", (req, res) => {
     const accSid = "ACa2c367ad1e339b7d7b8868620d056202";
-    const auth_token = "9a0a393ee0ec4f1cdfe3953e616a9815";
+    const auth_token = "297ded13e1fba6e87b6caa7115df8a84";
 
     const client = twilio(accSid, auth_token);
 
@@ -61,13 +61,14 @@ app.get("/api/get-turn-credentials", (req, res) => {
 const io = require('socket.io')(server, {
     cors: {
         origin: "*",
-        credentials:true
+        credentials: true
     }
 });
 
 io.on("connection", (socket) => {
     console.log("user connected" + " " + socket.id)
     socket.on("create-new-room", (data) => {
+        console.log("create-room", data)
         createNewRoomHandler(data, socket)
     })
 
