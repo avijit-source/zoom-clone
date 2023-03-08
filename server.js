@@ -3,7 +3,7 @@ const http = require('http');
 const { v4: uuidv4 } = require('uuid');
 const cors = require('cors');
 const twilio = require('twilio');
-
+const helmet = require('helmet');
 
 
 const PORT = process.env.PORT || 5000;
@@ -12,7 +12,12 @@ const app = express();
 
 const server = http.createServer(app);
 
+app.use(helmet())
+
+app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }))
+
 app.use(cors());
+
 
 
 let connectedUsers = [];
@@ -55,8 +60,7 @@ app.get("/api/get-turn-credentials", (req, res) => {
 
 const io = require('socket.io')(server, {
     cors: {
-        origin: "*",
-        methods: ["GET", "POST"]
+        origin: "https://extraordinary-lokum-edaf9d.netlify.app",
     }
 });
 
