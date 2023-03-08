@@ -60,7 +60,8 @@ app.get("/api/get-turn-credentials", (req, res) => {
 
 const io = require('socket.io')(server, {
     cors: {
-        origin: "https://extraordinary-lokum-edaf9d.netlify.app",
+        origin: "*",
+        credentials:true
     }
 });
 
